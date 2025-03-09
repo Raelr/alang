@@ -1,0 +1,37 @@
+name: Windows
+
+on:
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: perform checkout
+        uses: actions/checkout@v4
+
+      - name: build all targets
+        run: mingw32-make
+
+      - name: run tests
+        run: |
+          ./build/tests/tests/exe
+
+      - name: compress output
+        run: Compress-Archive -Path ./build/* -DestinationPath ./windows.zip
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows_output
+          path: ./windows.zip
