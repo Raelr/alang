@@ -11,8 +11,8 @@ all: $(ALANG_APP)
 
 $(ALANG_APP): $(ALANG_SRC_OBJS)
 	$(call MKDIR,$(@D))
-	gcc.exe $(ALANG_SRC_OBJS) -o $(ALANG_APP) -L $(LIB_DIR) -l compiler
+	gcc.exe $(ALANG_SRC_OBJS) -o $(ALANG_APP) -L $(LIB_DIR) -l compiler -l utils
 
 $(ALANG_BUILD_DIR)/%.o: $(ALANG_PATH)/%.c
 	$(call MKDIR,$(@D))
-	gcc.exe -MMD -MP -c -I $(COMPILER_DIR) $< -o $@
+	gcc.exe -MMD -MP -c -I $(COMPILER_DIR) -I $(UTILS_DIR) $< -o $@

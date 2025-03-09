@@ -11,7 +11,7 @@ all: $(TEST_APP)
 
 $(TEST_APP): $(TEST_SRC_OBJS)
 	$(call MKDIR,$(@D))
-	gcc.exe $(TEST_SRC_OBJS) -o $(TEST_APP) -L $(LIB_DIR) -l compiler
+	gcc.exe $(TEST_SRC_OBJS) -o $(TEST_APP) -L $(LIB_DIR) -l compiler -l utils
 
 $(TEST_BUILD_DIR)/%.o: $(TEST_PATH)/%.c
 	$(call MKDIR,$(@D))

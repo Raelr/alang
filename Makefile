@@ -15,23 +15,28 @@ export COMPILER_DIR := $(call platformpth,$(abspath compiler))
 export TEST_APP := $(call platformpth,$(BUILD_DIR)/tests/tests)
 export TEST_DIR := $(call platformpth,$(abspath tests))
 
-export BENCHMARK_APP := $(call platformpth,$(BUILD_DIR)/benchmark/benchmark)
-export BENCHMARK_DIR := $(call platformpth,$(abspath benchmark))
+export UTILS_LIB := $(call platformpth,$(LIB_DIR)/libutils.a)
+export UTILS_DIR := $(call platformpth,$(abspath utils))
 
-.PHONY: all alang compiler tests
+.PHONY: all alang compiler tests utils
 
-all: alang compiler tests
+all: alang compiler tests utils
 
 $(COMPILER_LIB):
 	"$(MAKE)" -C $(COMPILER_DIR)
 
-$(ALANG_APP): $(COMPILER_LIB)
+$(UTILS_LIB):
+	"$(MAKE)" -C $(UTILS_DIR)
+
+$(ALANG_APP): $(UTILS_LIB) $(COMPILER_LIB)
 	"$(MAKE)" -C $(ALANG_DIR)
 
-$(TEST_APP): $(COMPILER_LIB)
+$(TEST_APP): $(UTILS_LIB) $(COMPILER_LIB)
 	"$(MAKE)" -C $(TEST_DIR)
 
 alang: $(ALANG_APP)
+
+utils: $(UTILS_LIB)
 
 compiler: $(COMPILER_LIB)
 

@@ -1,0 +1,6 @@
+#ifndef ALANG_UTILS_MEMORY_H
+#define ALANG_UTILS_MEMORY_H
+
+
+
+#endif // ALANG_UTILS_MEMORY_H
