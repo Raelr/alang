@@ -15,5 +15,5 @@ $(UTILS_LIB): $(UTILS_SRC_OBJS)
 	$(call COMBINELIBS,'',$(UTILS_SRC_OBJS),$(LIB_DIR),utils)
 
 $(UTILS_BUILD_DIR)/%.o: $(UTILS_PATH)/%.c
-	$(call MKDIR,$(@D))
-	gcc.exe -std=c17 -MMD -MP -c $< -o $(call platformpth,$@)
+	$(call MKDIR,$(call platformpth,$(@D)))
+	$(CXX) -std=c17 -MMD -MP -c $(call platformpth,$<) -o $(call platformpth,$@)

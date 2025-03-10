@@ -10,10 +10,9 @@ COMPILER_SRC_OBJS := $(call findobjs,$(COMPILER_PATH),$(COMPILER_BUILD_DIR),$(CO
 all: $(COMPILER_LIB)
 
 $(COMPILER_LIB): $(COMPILER_SRC_OBJS)
-	$(call RM,$(COMPILER_LIB))
-	$(call MKDIR,$(LIB_DIR))
+	$(call RM,$(call platformpth,$(COMPILER_LIB)))
 	$(call COMBINELIBS,'',$(COMPILER_SRC_OBJS),$(LIB_DIR),compiler)
 
 $(COMPILER_BUILD_DIR)/%.o: $(COMPILER_PATH)/%.c
-	$(call MKDIR,$(@D))
-	gcc.exe -MMD -MP -c $< -o $(call platformpth,$@)
+	$(call MKDIR,$(call platformpth,$(@D)))
+	$(CXX) -MMD -MP -c $< -o $(call platformpth,$@)
