@@ -4,6 +4,7 @@ UTILS_PATH := $(abspath .)
 UTILS_BUILD_DIR := $(BUILD_DIR)/objs/utils
 UTILS_SRC_FILES := $(call rwildcard,$(UTILS_PATH)/,*.c)
 UTILS_SRC_OBJS := $(call findobjs,$(UTILS_PATH),$(UTILS_BUILD_DIR),$(UTILS_SRC_FILES))
+UTILS_DEPENDS := $(patsubst %.o,%.d,$(call rwildcard,$(UTILS_BUILD_DIR)/,*.o))
 
 .PHONY: all
 
@@ -14,6 +15,10 @@ $(UTILS_LIB): $(UTILS_SRC_OBJS)
 	$(call MKDIR,$(LIB_DIR))
 	$(call COMBINELIBS,'',$(UTILS_SRC_OBJS),$(LIB_DIR),utils)
 
+-include $(UTILS_DEPENDS)
+
 $(UTILS_BUILD_DIR)/%.o: $(UTILS_PATH)/%.c
-	$(call MKDIR,$(@D))
-	gcc.exe -std=c17 -MMD -MP -c $< -o $(call platformpth,$@)
+	$(call MKDIR,$(BUILD_DIR))
+	$(call MKDIR,$(call platformpth,$(@D)))
+
+	$(CXX) -std=c17 -MMD -MP -c $(call platformpth,$<) -o $(call platformpth,$@)

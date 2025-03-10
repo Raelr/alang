@@ -1,19 +1,19 @@
 include make/Common.mk
 
-export MAKE_DIR := $(call platformpth,$(abspath make))
+export MAKE_DIR := $(abspath make)
 export LIB_DIR := $(abspath lib)
-export BUILD_DIR := $(call platformpth,$(abspath build))
-export SCRIPTS_DIR := $(call platformpth,$(abspath scripts))
-export VENDOR_DIR := $(call platformpth,$(abspath vendor))
+export BUILD_DIR := $(abspath build)
+export SCRIPTS_DIR := $(abspath scripts)
+export VENDOR_DIR := $(abspath vendor)
 
-export ALANG_DIR := $(call platformpth,$(abspath alang))
-export ALANG_APP := $(call platformpth,$(BUILD_DIR)/alang/alang)
+export ALANG_DIR := $(abspath alang)
+export ALANG_APP := $(BUILD_DIR)/alang/alang
 
-export COMPILER_LIB := $(call platformpth,$(LIB_DIR)/libcompiler.a)
-export COMPILER_DIR := $(call platformpth,$(abspath compiler))
+export COMPILER_LIB := $(LIB_DIR)/libcompiler.a
+export COMPILER_DIR := $(abspath compiler)
 
-export TEST_APP := $(call platformpth,$(BUILD_DIR)/tests/tests)
-export TEST_DIR := $(call platformpth,$(abspath tests))
+export TEST_APP := $(BUILD_DIR)/tests/tests
+export TEST_DIR := $(abspath tests)
 
 export UTILS_LIB := $(LIB_DIR)/libutils.a
 export UTILS_DIR := $(abspath utils)
