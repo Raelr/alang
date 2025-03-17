@@ -17,7 +17,7 @@ OBJS=$(echo "${OBJS}" | xargs)
 
 mkdir -p "$OUTPUT_DIR"
 
-ar -crs "$OUTPUT_DIR/lib$OUTPUT_NAME.a" "${OBJS}"
+ar -crs "$OUTPUT_DIR/lib$OUTPUT_NAME.a" ${OBJS}
 
 IFS=' ' read -ra SPLIT_LIBS <<< "$LIBS"
 
