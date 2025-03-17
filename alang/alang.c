@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <src/compiler.h>
+#include <compiler.h>
 #include <buffer.h>
 
 int main(int argc, const char* argv[])

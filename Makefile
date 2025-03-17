@@ -18,20 +18,23 @@ export TEST_DIR := $(abspath tests)
 export UTILS_LIB := $(LIB_DIR)/libutils.a
 export UTILS_DIR := $(abspath utils)
 
+export INCLUDES := -I $(UTILS_DIR)
+
+
 .PHONY: all alang compiler tests utils
 
 all: alang compiler tests utils
 
-$(COMPILER_LIB):
+$(COMPILER_LIB): $(UTILS_LIB)
 	"$(MAKE)" -C $(COMPILER_DIR)
 
 $(UTILS_LIB):
 	"$(MAKE)" -C $(UTILS_DIR)
 
-$(ALANG_APP): $(UTILS_LIB) $(COMPILER_LIB)
+$(ALANG_APP): $(COMPILER_LIB)
 	"$(MAKE)" -C $(ALANG_DIR)
 
-$(TEST_APP): $(UTILS_LIB) $(COMPILER_LIB)
+$(TEST_APP): $(COMPILER_LIB)
 	"$(MAKE)" -C $(TEST_DIR)
 
 alang: $(ALANG_APP)

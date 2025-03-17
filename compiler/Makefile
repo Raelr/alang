@@ -11,7 +11,7 @@ all: $(COMPILER_LIB)
 
 $(COMPILER_LIB): $(COMPILER_SRC_OBJS)
 	$(call RM,$(call platformpth,$(COMPILER_LIB)))
-	$(call COMBINELIBS,'',$(COMPILER_SRC_OBJS),$(LIB_DIR),compiler)
+	$(call COMBINELIBS,$(UTILS_LIB),$(COMPILER_SRC_OBJS),$(LIB_DIR),compiler)
 
 $(COMPILER_BUILD_DIR)/%.o: $(COMPILER_PATH)/%.c
 	$(call MKDIR,$(call platformpth,$(@D)))
